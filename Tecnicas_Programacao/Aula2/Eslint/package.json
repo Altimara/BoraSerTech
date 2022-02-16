@@ -1,0 +1,16 @@
+{
+  "name": "4_modulo_Tecnicas_Programacao",
+  "version": "1.0.0",
+  "description": "Importancia do Linter",
+  "main": "index.js",
+  "scripts":{
+    "Start": "node index.js"
+  },
+  "author": "Altimara",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.4"
+  }
+}
