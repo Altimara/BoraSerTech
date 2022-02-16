@@ -4,7 +4,8 @@
   "description": "Importancia do Linter",
   "main": "index.js",
   "scripts":{
-    "Start": "node index.js"
+    "Start": "node index.js",
+    "lintAlt":"eslint ./index.js"
   },
   "author": "Altimara",
   "license": "ISC",
