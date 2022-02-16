@@ -1,0 +1,16 @@
+{
+  "name": "tec-programacao-node",
+  "version": "1.0.0",
+  "description": "\"Nosso primeiro projeto node.js\"",
+  "main": "index.js",
+  "dependencies": {
+    "ascii-art":"2.8.5",
+    "prompt-sync":"^4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "Start": "node index.js";
+  },
+  "author": "Altimara",
+  "license": "ISC",
+}
