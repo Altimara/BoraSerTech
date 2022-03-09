@@ -1,7 +1,6 @@
 const fsPromise = require('fs').promises;
 const path = require('path');
-
-const fs = require('fs');
+const https = require('https');
 
 const FOLDER_PATH = path.join(__dirname, 'txt-files');
 
@@ -71,19 +70,41 @@ function getBodyWithPromise(req) {
 }
 
 async function writeTxtFile(content) {
-  const newFileName = `${new Date().toISOString().substring(0,10)}.txt`;
+  const newFileName = `${new Date().toISOString()}.txt`;
   const newFilePath = path.join(FOLDER_PATH, newFileName);
 
-  //await fsPromise.writeFile(newFilePath, content);
-  fs.writeFile(newFilePath, "Opa Beer", function(err){
-    if(err) throw err;
-    console.log("Arquivo criado com sucesso!");
-  });  
-  
+  await fsPromise.writeFile(newFilePath, content);
   return {
     fileName: newFileName,
     content,
   };
+}
+
+function fetchPokemon(id = 1) {
+  const BASE_URL = 'https://pokeapi.co/api/v2/pokemon/';
+  const pokeURL = `${BASE_URL}${id}`;
+
+  return new Promise((resolve, reject) => {
+    const req = https.request(pokeURL, res => {
+      const data = [];
+
+      res.on('data', chunk => {
+        data.push(chunk);
+      });
+
+      res.on('end', () => {
+        const pokemonRaw = Buffer.concat(data).toString();
+        const pokemonJSON = JSON.parse(pokemonRaw);
+        resolve(pokemonJSON.name);
+      });
+    })
+
+    req.on('error', error => {
+      reject(error);
+    });
+
+    req.end();
+  });
 }
 
 module.exports = {
@@ -93,4 +114,5 @@ module.exports = {
   getBodyWithPromise,
   FOLDER_PATH,
   writeTxtFile,
+  fetchPokemon,
 };
