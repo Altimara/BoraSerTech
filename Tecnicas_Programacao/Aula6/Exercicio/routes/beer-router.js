@@ -2,8 +2,6 @@ const path = require('path');
 const URL = require('url');
 const gtts = require('node-gtts')('pt');
 
-const fs = require('fs');
-
 const {
   readTxtFiles,
   createHTMLBody,
@@ -26,18 +24,8 @@ async function beerRouter(req, res) {
 }
 
 async function handlePOSTRequest(req, res) {
-  /*const body = await getBodyWithForAwait(req);
-  const result = await writeTxtFile(body);
-
-  res.writeHead(201, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(result));*/
   const body = await getBodyWithForAwait(req);
   const result = await writeTxtFile(body);
-  //const result = "";
-  /*fs.writeFile('arquivo.txt', 'Conteúdo', function(err){
-    //if(err) throw err;
-    console.log("Arquivo criado com sucesso!");
-  });*/
 
   res.writeHead(201, { 'Content-Type': 'application/json' });
   res.end(JSON.stringify(result));
